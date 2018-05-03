@@ -1,0 +1,231 @@
+<style>
+    .forecast-bar .value-1, .forecast-bar .value-2 {
+        width: calc(100% - 30px);
+        box-sizing: border-box;
+        margin-left: 15px;
+        margin-right: 15px;
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        left: 0;
+    }
+    .forecast-bar .value-1 {
+        border-left: 3px dashed white;
+        border-right: 3px dashed white;
+        border-top: 3px dashed white;
+        background: rgba(0,0,0,0);
+    }
+    .forecast-bar .value-2 {
+        width:          calc(100% - 30px);
+        border-left:    3px solid white;
+        border-right:   3px solid white;
+        border-top:     3px solid white;
+        /*background: #46649B;*/
+    }
+    .forecast-bar .value-2-inner {
+        background: repeating-linear-gradient(
+                135deg,
+                white,
+                white 2px,
+                rgba(0,0,0,0) 2px,
+                rgba(0,0,0,0) 12px
+        );
+        width: 100%;
+        height: 100%;
+    }
+    .forecast-bar .arrow-left, .forecast-bar .arrow-right {
+        font-size: 32px;
+        position: absolute;
+        color: white;
+    }
+    .forecast-bar .arrow-left {
+        left: -12px;
+    }
+    .forecast-bar .arrow-right {
+        right: -12px;
+    }
+
+    .forecast-bar .line-left, .forecast-bar .line-right {
+        position: absolute;
+        border-bottom: 1px dashed #AAA;
+        box-sizing: border-box;
+        height: 2px;
+
+    }
+    .forecast-bar .line-left {
+        left: 12px;
+        width: calc(100% - 24px);
+    }
+    .forecast-bar .line-right {
+        right: 12px;
+        width: calc(100% - 24px);
+    }
+    .forecast-bar .forecast-texts {
+    }
+    .forecast-bar .check-visibility[data-oid=""]{
+        display: none;
+    }
+    .forecast-bar  .label-value-1, .forecast-bar .label-value-2 {
+        position: absolute;
+        white-space: nowrap;
+    }
+    .forecast-bar  .label-value-1 {
+        left: calc(100% - 13px);
+    }
+    .forecast-bar .label-value-2 {
+        right: calc(100% - 13px);
+    }
+
+    .forecast-bar .label-left {
+        position: absolute;
+        white-space: nowrap;
+        right: calc(100% + 9px);
+    }
+    .forecast-bar .label-right {
+        position: absolute;
+        white-space: nowrap;
+        left: calc(100% + 9px);
+    }
+    .forecast-bar .forecast-title {
+        position: absolute;
+        top: calc(100% + 10px);
+        width: 100%;
+        font-weight: bold;
+        font-size: 18px;
+        white-space: nowrap;
+    }
+
+    .forecast-bar .forecast-title-inner {
+        position: relative;
+        float: left;
+        left: 50%;
+        transform: translate(-50%, 0%);
+    }
+</style>
+<script>
+    vis.binds['special-charts'] = {
+        version: '0.0.2',
+        showVersion: function () {
+            if (vis.binds['special-charts'].version) {
+                console.log('Version special-charts: ' + vis.binds['special-charts'].version);
+                vis.binds['special-charts'].version = null;
+            }
+        },
+        getValue: function (oid) {
+            var val = 0;
+            if (oid || oid === '0') {
+                if (parseFloat(oid) !== oid) {
+                    val = vis.states.attr(oid + '.val');
+                } else {
+                    val = parseFloat(oid, 10);
+                }
+                return val;
+            } else {
+                return null;
+            }
+        },
+        forecastBar: {
+            draw: function (el, data) {
+                console.log('draw');
+                var $div = $(el).parent().find('.vis-widget-body');
+                var val1     = vis.binds['special-charts'].getValue(data['oid-value-1']);
+                var val2     = vis.binds['special-charts'].getValue(data['oid-value-2']);
+                var valLeft  = vis.binds['special-charts'].getValue(data['oid-left']);
+                var valRight = vis.binds['special-charts'].getValue(data['oid-right']);
+                var max = val1 > val2 ? val1 : val2;
+                max = max > valLeft  ? max : valLeft;
+                max = max > valRight ? max : valRight;
+
+                var val1Height     = Math.round(val1     / max * 100);
+                var val2Height     = Math.round(val2     / max * 100);
+                var valLeftHeight  = Math.round(valLeft  / max * 100);
+                var valRightHeight = Math.round(valRight / max * 100);
+
+                var $val1       = $div.find('.value-1')      .css('height', val1Height + '%');
+                var $val2       = $div.find('.value-2')      .css('height', val2Height + '%');
+                var $label1     = $div.find('.label-value-1').css('top', 'calc(' + (100 - val1Height)  + '% - 5px)');
+                var $label2     = $div.find('.label-value-2').css('top', 'calc(' + (100 - val2Height)  + '% - 5px)');
+
+                var $valLeft    = $div.find('.line-left')    .css('top', (100 - valLeftHeight)  + '%');
+                var $valRight   = $div.find('.line-right')   .css('top', (100 - valRightHeight) + '%');
+                var $labelLeft  = $div.find('.label-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 8px)');
+                var $labelRight = $div.find('.label-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 8px)');
+                var $arrowLeft  = $div.find('.arrow-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 22px)');
+                var $arrowRight = $div.find('.arrow-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 22px)');
+
+                if (val1 > val2) {
+                    $val1.css({'z-index': 0, 'border-radius': '8px 8px 0 0'});
+                    $val2.css({'z-index': 1, 'border-radius': ''});
+                } else {
+                    $val1.css({'z-index': 1, 'border-radius': ''});
+                    $val2.css({'z-index': 0, 'border-radius': '8px 8px 0 0'});
+                }
+            },
+            init: function (el, data) {
+                var bound = [];
+
+                function onChange() {
+                    vis.binds['special-charts'].forecastBar.draw(el, data);
+                }
+
+                if (data['oid-value-1'] && parseFloat(data['oid-value-1']) !== data['oid-value-1']) {
+                    bound.push(data['oid-value-1'] + '.val');
+                    vis.states.bind(data['oid-value-1'] + '.val', onChange);
+                }
+                if (data['oid-value-2'] && parseFloat(data['oid-value-2']) !== data['oid-value-2']) {
+                    bound.push(data['oid-value-2'] + '.val');
+                    vis.states.bind(data['oid-value-2'] + '.val', onChange);
+                }
+                if (data['oid-left'] && parseFloat(data['oid-left']) !== data['oid-left']) {
+                    bound.push(data['oid-left'] + '.val');
+                    vis.states.bind(data['oid-left'] + '.val', onChange);
+                }
+                if (data['oid-right'] && parseFloat(data['oid-right']) !== data['oid-right']) {
+                    bound.push(data['oid-right'] + '.val');
+                    vis.states.bind(data['oid-right'] + '.val', onChange);
+                }
+                if (bound.length) {
+                    // remember all ids, that bound
+                    $(el).parent().parent()
+                        .data('bound', bound)
+                        // remember bind handler
+                        .data('bindHandler', onChange);
+                }
+                onChange();
+            }
+        }
+    };
+    console.log('Version special-charts: ' + vis.binds['special-charts'].version);
+
+</script>
+
+<script id="tplSpecialForecastChart"
+        type="text/ejs"
+        class="vis-tpl"
+        data-vis-type="chart,number,barchart"
+        data-vis-prev='<img src="widgets/special-charts/img/Prev_ForecastChart.png"></img>'
+        data-vis-set="special-charts"
+        data-vis-name="ForecastBar"
+        data-vis-attrs="oid-value-1/id;oid-value-2/id;oid-left/id;oid-right/id;"
+        data-vis-attrs0="group.labels;label-value-1/text;label-value-2/text;label-left/text;label-right/text;title/text;"
+        data-vis-attrs1="group.colors;color-value-1/color;color-value-2/color;color-border/color;"
+>
+	<div id="<%= this.data.attr('wid') %>" class="vis-widget" style="overflow: visible; width: 100px; height: 200px;">
+		<div class="vis-widget-body <%== this.data.attr('class') %> forecast-bar" style="max-width: 100px;" >
+			<div   class="value-1" style="background: <%== this.data['color-value-1'] %>; border-color: <%== this.data['color-border'] %>"></div>
+			<div   class="value-2" style="background: <%== this.data['color-value-2'] %>; border-color: <%== this.data['color-border'] %>"><div class="value-2-inner" style="background: repeating-linear-gradient(135deg, <%== this.data['color-border'] %>, <%== this.data['color-border'] %> 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 12px);"></div></div>
+			<div   class="label-value-1 forecast-texts"><%== this.data.attr('label-value-1') %></div>
+			<div   class="label-value-2 forecast-texts"><%== this.data.attr('label-value-2') %></div>
+
+			<span  class="check-visibility arrow-left"   data-oid="<%== this.data['oid-special-left']  %>">⯈</span>
+			<span  class="check-visibility arrow-right"  data-oid="<%== this.data['oid-special-right'] %>">⯇</span>
+			<div   class="check-visibility line-left"    data-oid="<%== this.data['oid-special-left']  %>"></div>
+			<div   class="check-visibility line-right"   data-oid="<%== this.data['oid-special-right'] %>"></div>
+			<div   class="check-visibility label-left   forecast-texts" data-oid="<%== this.data['oid-left']  %>"><%== this.data.attr('label-left')  %></div>
+			<div   class="check-visibility label-right  forecast-texts" data-oid="<%== this.data['oid-right'] %>"><%== this.data.attr('label-right') %></div>
+
+			<div   class="forecast-title forecast-texts"><div class="forecast-title-inner"><%== this.data.attr('title') %></div></div>
+		</div>
+		<div <%= (el) -> vis.binds['special-charts'].forecastBar.init(el, this.data) %>></div>
+	</div>
+</script> 

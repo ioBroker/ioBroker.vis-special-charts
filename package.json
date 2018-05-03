@@ -1,0 +1,49 @@
+{
+  "author": {
+    "name": "bluefox",
+    "email": "dogaofx@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/ioBroker/ioBroker.vis-special-charts/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "bluefox",
+      "email": "dogaofx@gmail.com"
+    }
+  ],
+  "deprecated": false,
+  "description": "Speical Charts Widgets for ioBroker.vis",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2"
+  },
+  "homepage": "https://github.com/ioBroker/ioBroker.vis-special-charts",
+  "keywords": [
+    "ioBroker",
+    "GUI",
+    "DashUI",
+    "web interface",
+    "home automation",
+    "SCADA"
+  ],
+  "license": "CC-BY-NC-4.0",
+  "licenses": [
+    {
+      "type": "CC-BY-NC-4.0",
+      "url": "https://github.com/ioBroker/ioBroker.vis-special-charts/blob/master/LICENSE"
+    }
+  ],
+  "main": "widgets/special-charts.html",
+  "name": "iobroker.vis-special-charts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ioBroker/ioBroker.vis-special-charts.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.2.0"
+}
