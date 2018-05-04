@@ -34,7 +34,8 @@
         height: 100%;
     }
     .forecast-bar .arrow-left, .forecast-bar .arrow-right {
-        font-size: 32px;
+        width: 35px;
+        top: calc(0% - 16px);
         position: absolute;
         color: white;
     }
@@ -104,7 +105,7 @@
 </style>
 <script>
     vis.binds['special-charts'] = {
-        version: '0.0.2',
+        version: '0.2.1',
         showVersion: function () {
             if (vis.binds['special-charts'].version) {
                 console.log('Version special-charts: ' + vis.binds['special-charts'].version);
@@ -150,8 +151,8 @@
                 var $valRight   = $div.find('.line-right')   .css('top', (100 - valRightHeight) + '%');
                 var $labelLeft  = $div.find('.label-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 8px)');
                 var $labelRight = $div.find('.label-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 8px)');
-                var $arrowLeft  = $div.find('.arrow-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 22px)');
-                var $arrowRight = $div.find('.arrow-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 22px)');
+                var $arrowLeft  = $div.find('.arrow-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 17px)');
+                var $arrowRight = $div.find('.arrow-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 17px)');
 
                 if (val1 > val2) {
                     $val1.css({'z-index': 0, 'border-radius': '8px 8px 0 0'});
@@ -208,7 +209,7 @@
         data-vis-name="ForecastBar"
         data-vis-attrs="oid-value-1/id;oid-value-2/id;oid-left/id;oid-right/id;"
         data-vis-attrs0="group.labels;label-value-1/text;label-value-2/text;label-left/text;label-right/text;title/text;"
-        data-vis-attrs1="group.colors;color-value-1/color;color-value-2/color;color-border/color;"
+        data-vis-attrs1="group.colors;color-value-1/color;color-value-2/color;color-border/color;color-arrow[#FFFFFF]/color;"
 >
 	<div id="<%= this.data.attr('wid') %>" class="vis-widget" style="overflow: visible; width: 100px; height: 200px;">
 		<div class="vis-widget-body <%== this.data.attr('class') %> forecast-bar" style="max-width: 100px;" >
@@ -217,8 +218,16 @@
 			<div   class="label-value-1 forecast-texts"><%== this.data.attr('label-value-1') %></div>
 			<div   class="label-value-2 forecast-texts"><%== this.data.attr('label-value-2') %></div>
 
-			<span  class="check-visibility arrow-left"   data-oid="<%== this.data['oid-special-left']  %>">⯈</span>
-			<span  class="check-visibility arrow-right"  data-oid="<%== this.data['oid-special-right'] %>">⯇</span>
+			<span   class="check-visibility arrow-left"   data-oid="<%== this.data['oid-special-left']  %>">
+			    <svg viewBox="0 0 20 20" style="fill:<%== this.data['color-arrow'] %>;width:35px;height:auto">
+                    <path d="M15,10l-9,5V5L15,10z"/>
+                </svg>
+			</span>
+			<span class="check-visibility arrow-right"  data-oid="<%== this.data['oid-special-right'] %>" >
+			    <svg viewBox="0 0 20 20" style="fill:<%== this.data['color-arrow'] %>;width:35px;height:auto">
+                    <path d="M14,5v10l-9-5L14,5z"/>
+                </svg>
+			</span>
 			<div   class="check-visibility line-left"    data-oid="<%== this.data['oid-special-left']  %>"></div>
 			<div   class="check-visibility line-right"   data-oid="<%== this.data['oid-special-right'] %>"></div>
 			<div   class="check-visibility label-left   forecast-texts" data-oid="<%== this.data['oid-left']  %>"><%== this.data.attr('label-left')  %></div>

@@ -12,7 +12,7 @@ Color selector widgets for ioBroker.vis
 ![Example](img/widgets.png)
 
 ## Changelog
-### 0.1.0 (2018-05-03)
+### 0.2.1 (2018-05-05)
 - (bluefox) initial checkin
 
 ## License

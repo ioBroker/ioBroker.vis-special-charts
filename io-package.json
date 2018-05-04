@@ -1,9 +1,9 @@
 {
     "common": {
         "name":                     "vis-special-charts",
-        "version": "0.1.0",
+        "version": "0.2.1",
 		"news": {
-			"0.1.0": {
+			"0.2.1": {
 				"en": "initial commit",
 				"de": "initial commit",
 				"ru": "initial commit"
@@ -13,7 +13,7 @@
         "desc": {
             "en":                   "Special charts",
             "de":                   "Special charts Widgets für ioBroker.vis",
-            "ru":                   "Special charts для ioBroker.vis"
+            "ru":                   "Специальные графики для ioBroker.vis"
         },
         "platform":                 "Javascript/Node.js",
         "loglevel":                 "info",
