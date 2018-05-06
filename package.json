@@ -1,4 +1,6 @@
 {
+  "name": "iobroker.vis-special-charts",
+  "version": "0.2.2",
   "author": {
     "name": "bluefox",
     "email": "dogaofx@gmail.com"
@@ -37,13 +39,11 @@
     }
   ],
   "main": "widgets/special-charts.html",
-  "name": "iobroker.vis-special-charts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ioBroker/ioBroker.vis-special-charts.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "version": "0.2.1"
+  }
 }

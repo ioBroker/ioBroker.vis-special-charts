@@ -144,15 +144,16 @@
 
                 var $val1       = $div.find('.value-1')      .css('height', val1Height + '%');
                 var $val2       = $div.find('.value-2')      .css('height', val2Height + '%');
-                var $label1     = $div.find('.label-value-1').css('top', 'calc(' + (100 - val1Height)  + '% - 5px)');
-                var $label2     = $div.find('.label-value-2').css('top', 'calc(' + (100 - val2Height)  + '% - 5px)');
 
-                var $valLeft    = $div.find('.line-left')    .css('top', (100 - valLeftHeight)  + '%');
-                var $valRight   = $div.find('.line-right')   .css('top', (100 - valRightHeight) + '%');
-                var $labelLeft  = $div.find('.label-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 8px)');
-                var $labelRight = $div.find('.label-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 8px)');
-                var $arrowLeft  = $div.find('.arrow-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 17px)');
-                var $arrowRight = $div.find('.arrow-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 17px)');
+                $div.find('.label-value-1').css('top', 'calc(' + (100 - val1Height)  + '% - 5px)');
+                $div.find('.label-value-2').css('top', 'calc(' + (100 - val2Height)  + '% - 5px)');
+
+                $div.find('.line-left')    .css('top', (100 - valLeftHeight)  + '%');
+                $div.find('.line-right')   .css('top', (100 - valRightHeight) + '%');
+                $div.find('.label-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 8px)');
+                $div.find('.label-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 8px)');
+                $div.find('.arrow-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 17px)');
+                $div.find('.arrow-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 17px)');
 
                 if (val1 > val2) {
                     $val1.css({'z-index': 0, 'border-radius': '8px 8px 0 0'});
@@ -165,8 +166,15 @@
             init: function (el, data) {
                 var bound = [];
 
+                var timer;
                 function onChange() {
-                    vis.binds['special-charts'].forecastBar.draw(el, data);
+                    if (timer) {
+                        clearTimeout(timer);
+                    }
+                    timer = setTimeout(function () {
+                        timer = null;
+                        vis.binds['special-charts'].forecastBar.draw(el, data);
+                    }, 300);
                 }
 
                 if (data['oid-value-1'] && parseFloat(data['oid-value-1']) !== data['oid-value-1']) {

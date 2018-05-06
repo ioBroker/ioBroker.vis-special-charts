@@ -7,12 +7,12 @@
 
 [![NPM](https://nodei.co/npm/iobroker.vis-special-charts.png?downloads=true)](https://nodei.co/npm/iobroker.vis-special-charts/)
 
-Color selector widgets for ioBroker.vis
+Special chart widget for ioBroker.vis
 
 ![Example](img/widgets.png)
 
 ## Changelog
-### 0.2.1 (2018-05-05)
+### 0.2.2 (2018-05-06)
 - (bluefox) initial checkin
 
 ## License
