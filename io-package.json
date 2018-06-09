@@ -1,13 +1,24 @@
 {
     "common": {
         "name":                     "vis-special-charts",
-        "version": "0.2.2",
+        "version": "0.2.3",
 		"news": {
-			"0.2.2": {
-				"en": "initial commit",
-				"de": "initial commit",
-				"ru": "initial commit"
-			}
+			"0.2.3": {
+              "en": "Tooltips was added",
+              "de": "Tooltips wurde hinzugefügt",
+              "ru": "Добавлены всплывающие подсказки",
+              "pt": "Tooltips foi adicionado",
+              "nl": "Tooltips is toegevoegd",
+              "fr": "Des info-bulles ont été ajoutées",
+              "it": "Sono stati aggiunti i suggerimenti",
+              "es": "Se agregaron Tooltips",
+              "pl": "Dodano podpowiedzi"
+            },
+            "0.2.2": {
+              "en": "initial commit",
+              "de": "initial commit",
+              "ru": "initial commit"
+            }
 		},
         "title":                    "Special charts",
         "desc": {

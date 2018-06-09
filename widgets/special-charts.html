@@ -105,7 +105,7 @@
 </style>
 <script>
     vis.binds['special-charts'] = {
-        version: '0.2.1',
+        version: '0.2.2',
         showVersion: function () {
             if (vis.binds['special-charts'].version) {
                 console.log('Version special-charts: ' + vis.binds['special-charts'].version);
@@ -145,13 +145,13 @@
                 var $val1       = $div.find('.value-1')      .css('height', val1Height + '%');
                 var $val2       = $div.find('.value-2')      .css('height', val2Height + '%');
 
-                $div.find('.label-value-1').css('top', 'calc(' + (100 - val1Height)  + '% - 5px)');
-                $div.find('.label-value-2').css('top', 'calc(' + (100 - val2Height)  + '% - 5px)');
+                $div.find('.label-value-1').css('top', 'calc(' + (100 - val1Height)  + '% - 5px)').attr('title', val1);
+                $div.find('.label-value-2').css('top', 'calc(' + (100 - val2Height)  + '% - 5px)').attr('title', val2);
 
                 $div.find('.line-left')    .css('top', (100 - valLeftHeight)  + '%');
                 $div.find('.line-right')   .css('top', (100 - valRightHeight) + '%');
-                $div.find('.label-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 8px)');
-                $div.find('.label-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 8px)');
+                $div.find('.label-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 8px)').attr('title', valLeft);
+                $div.find('.label-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 8px)').attr('title', valRight);
                 $div.find('.arrow-left')   .css('top', 'calc(' + (100 - valLeftHeight)  + '% - 17px)');
                 $div.find('.arrow-right')  .css('top', 'calc(' + (100 - valRightHeight) + '% - 17px)');
 
