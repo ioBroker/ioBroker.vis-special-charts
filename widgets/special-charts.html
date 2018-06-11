@@ -105,7 +105,7 @@
 </style>
 <script>
     vis.binds['special-charts'] = {
-        version: '0.2.4',
+        version: '0.2.5',
         showVersion: function () {
             if (vis.binds['special-charts'].version) {
                 console.log('Version special-charts: ' + vis.binds['special-charts'].version);
@@ -150,9 +150,10 @@
                 } else {
                     color       = data['color-border-error'] || color;
                 }
+                var backColor   = 'repeating-linear-gradient(135deg, ' + color + ', ' + color + ' 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 12px)';
                 $val1       = $div.find('.value-1')      .css({height: val1Height + '%', 'border-color': color});
                 $val2       = $div.find('.value-2')      .css({height: val2Height + '%', 'border-color': color});
-
+                $div.find('.value-2-inner').css({background: backColor});
                 $div.find('.label-value-1').css('top', 'calc(' + (100 - val1Height)  + '% - 5px)').attr('title', val1);
                 $div.find('.label-value-2').css('top', 'calc(' + (100 - val2Height)  + '% - 5px)').attr('title', val2);
 
@@ -229,8 +230,8 @@
 >
 	<div id="<%= this.data.attr('wid') %>" class="vis-widget" style="overflow: visible; width: 100px; height: 200px;">
 		<div class="vis-widget-body <%== this.data.attr('class') %> forecast-bar" style="max-width: 100px;" >
-			<div   class="value-1" style="background: <%== this.data['color-value-1'] %>; border-color: <%== this.data['color-border'] %>"></div>
-			<div   class="value-2" style="background: <%== this.data['color-value-2'] %>; border-color: <%== this.data['color-border'] %>"><div class="value-2-inner" style="background: repeating-linear-gradient(135deg, <%== this.data['color-border'] %>, <%== this.data['color-border'] %> 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 12px);"></div></div>
+			<div   class="value-1" style="background: <%== this.data['color-value-1'] %>; %>"></div>
+			<div   class="value-2" style="background: <%== this.data['color-value-2'] %>; %>"><div class="value-2-inner"></div></div>
 			<div   class="label-value-1 forecast-texts"><%== this.data.attr('label-value-1') %></div>
 			<div   class="label-value-2 forecast-texts"><%== this.data.attr('label-value-2') %></div>
 
