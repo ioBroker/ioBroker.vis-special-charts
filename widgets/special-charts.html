@@ -105,7 +105,7 @@
 </style>
 <script>
     vis.binds['special-charts'] = {
-        version: '0.2.2',
+        version: '0.2.4',
         showVersion: function () {
             if (vis.binds['special-charts'].version) {
                 console.log('Version special-charts: ' + vis.binds['special-charts'].version);
@@ -144,6 +144,14 @@
 
                 var $val1       = $div.find('.value-1')      .css('height', val1Height + '%');
                 var $val2       = $div.find('.value-2')      .css('height', val2Height + '%');
+                var color       = data['color-border'];
+                if (val2 < valLeft && val2 < valRight && valLeft < valRight) {
+                    color       = data['color-border'];
+                } else {
+                    color       = data['color-border-error'] || color;
+                }
+                $val1       = $div.find('.value-1')      .css({height: val1Height + '%', 'border-color': color});
+                $val2       = $div.find('.value-2')      .css({height: val2Height + '%', 'border-color': color});
 
                 $div.find('.label-value-1').css('top', 'calc(' + (100 - val1Height)  + '% - 5px)').attr('title', val1);
                 $div.find('.label-value-2').css('top', 'calc(' + (100 - val2Height)  + '% - 5px)').attr('title', val2);
@@ -217,7 +225,7 @@
         data-vis-name="ForecastBar"
         data-vis-attrs="oid-value-1/id;oid-value-2/id;oid-left/id;oid-right/id;"
         data-vis-attrs0="group.labels;label-value-1/text;label-value-2/text;label-left/text;label-right/text;title/text;"
-        data-vis-attrs1="group.colors;color-value-1/color;color-value-2/color;color-border/color;color-arrow[#FFFFFF]/color;"
+        data-vis-attrs1="group.colors;color-value-1/color;color-value-2/color;color-border/color;color-border-error/color;color-arrow[#FFFFFF]/color;"
 >
 	<div id="<%= this.data.attr('wid') %>" class="vis-widget" style="overflow: visible; width: 100px; height: 200px;">
 		<div class="vis-widget-body <%== this.data.attr('class') %> forecast-bar" style="max-width: 100px;" >

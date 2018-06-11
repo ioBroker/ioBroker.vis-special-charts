@@ -12,7 +12,7 @@ Special chart widget for ioBroker.vis
 ![Example](img/widgets.png)
 
 ## Changelog
-### 0.2.3 (2018-06-09)
+### 0.2.4 (2018-06-09)
 - (bluefox) Tooltips showed
 
 ### 0.2.2 (2018-05-06)
