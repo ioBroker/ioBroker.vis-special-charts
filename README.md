@@ -1,6 +1,5 @@
 ![Logo](admin/special-charts.png)
 # ioBroker.vis-special-charts
-============
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.vis-special-charts.svg)](https://www.npmjs.com/package/iobroker.vis-special-charts)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.vis-special-charts.svg)](https://www.npmjs.com/package/iobroker.vis-special-charts)
@@ -19,7 +18,7 @@ Special chart widget for ioBroker.vis
 - (bluefox) initial checkin
 
 ## License
- Copyright (c) 2018 bluefox https://github.com/GermanBluefox <dogafox@gmail.com>, 
+ Copyright (c) 2018-2020 bluefox https://github.com/GermanBluefox <dogafox@gmail.com>, 
  
  Creative Common Attribution-NonCommercial (CC BY-NC)
 
